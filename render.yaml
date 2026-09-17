@@ -1,0 +1,25 @@
+# Render Blueprint — archivo final de deploy para SyncShip.
+# Uso: sube este repo a GitHub y en https://dashboard.render.com elige
+# "New +" → "Blueprint" → selecciona el repo. Render lee este archivo y crea el servicio.
+#
+# Notas del plan Free:
+#  - Soporta WebSockets (Socket.io funciona sin adapters).
+#  - El servicio se dorme tras 15 min sin tráfico; la primera petición tarda 30-60 s.
+#    Abre la URL principal 1-2 minutos antes del evento para que despierte.
+#  - Render inyecta la variable PORT automáticamente; server.js la lee de process.env.PORT.
+services:
+  - type: web
+    name: syncship
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"

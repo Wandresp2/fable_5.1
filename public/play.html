@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#03040a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>SyncShip — Controlador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="controller">
+  <div class="stars-bg"></div>
+
+  <!-- 1. UNIÓN -->
+  <section id="screen-join" class="screen">
+    <h1 class="brand">SYNCSHIP</h1>
+    <p>Una sala entera pilota una sola nave. La nave sigue el <strong>promedio</strong> del movimiento de todos.</p>
+    <input id="input-name" class="input-name" type="text" maxlength="16" autocomplete="off"
+           placeholder="Tu nombre de piloto (opcional)">
+    <button id="btn-join" class="btn-join">🚀 UNIRME A LA MISIÓN</button>
+    <div class="hint">📱 Inclina tu teléfono para controlar la nave</div>
+    <div id="join-status" class="hint"></div>
+  </section>
+
+  <!-- 2. PERMISO (iOS) -->
+  <section id="screen-permission" class="screen hidden">
+    <h1 class="brand">SYNCSHIP</h1>
+    <p>Tu teléfono necesita permiso para leer el sensor de movimiento. Es solo para inclinar la nave, no se guarda nada.</p>
+    <button id="btn-permission" class="btn-join">📡 ACTIVAR SENSOR DE MOVIMIENTO</button>
+    <button id="btn-skip-permission" class="btn-ghost">Usar botones en vez del sensor</button>
+    <div id="permission-status" class="hint"></div>
+  </section>
+
+  <!-- 3. JUEGO -->
+  <section id="screen-game" class="screen hidden">
+    <div class="pilot-header">
+      <div class="pilot-name">👨‍🚀 <span id="my-name">Piloto</span></div>
+      <div class="pilot-count">👥 <span id="player-count">1</span> conectados</div>
+    </div>
+
+    <div id="phase-msg" class="phase-msg">ESPERANDO AL ANFITRIÓN…</div>
+
+    <div id="tilt-box" class="tilt-box">
+      <div class="label-top">▲ SUBIR</div>
+      <div class="midline"></div>
+      <div id="tilt-ghost" class="ghost" title="Promedio del grupo"></div>
+      <div id="tilt-ball" class="ball"></div>
+      <div class="label-bottom">▼ BAJAR</div>
+    </div>
+
+    <div id="fallback-btns" class="fallback-btns hidden">
+      <button id="btn-up" class="btn-tilt">▲ SUBIR</button>
+      <button id="btn-down" class="btn-tilt">▼ BAJAR</button>
+    </div>
+
+    <div id="badge" class="badge wait">⏳ Esperando que inicie la misión</div>
+
+    <div class="direction">Inclinación: <span id="direction-arrow">—</span></div>
+
+    <div class="mini-stats">
+      <div>SCORE <b id="mini-score">0</b></div>
+      <div>VIDAS <b id="mini-lives">3</b></div>
+    </div>
+
+    <button id="btn-recalibrate" class="btn-ghost">🎯 Recalibrar posición neutral</button>
+  </section>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/controller.js"></script>
+</body>
+</html>

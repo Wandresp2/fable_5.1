@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "server.js" }
+  ],
+  "note": "ADVERTENCIA: Vercel no soporta WebSockets persistentes. Este archivo es solo para referencia. Usar Render (render.yaml) o Railway para el deploy real."
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SyncShip — Pantalla principal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+
+  <!-- LOBBY -->
+  <section id="lobby" class="overlay">
+    <h1 class="brand">SYNCSHIP</h1>
+    <p class="subtitle">Escanea el QR y únete a la misión</p>
+
+    <div class="qr-box">
+      <div id="qr-lobby"></div>
+      <div class="qr-label" id="qr-lobby-label"></div>
+    </div>
+
+    <div class="pilot-counter">
+      <span class="dot"></span>
+      <span id="lobby-count">0 pilotos listos</span>
+    </div>
+
+    <div id="lobby-players" class="pilot-grid">
+      <span class="pilot-empty">Esperando pilotos…</span>
+    </div>
+
+    <button id="btn-start" class="btn-primary" disabled>🚀 INICIAR MISIÓN</button>
+    <div id="start-hint" class="btn-hint">Se necesitan al menos 2 pilotos</div>
+  </section>
+
+  <!-- PANEL DE PILOTOS (durante el juego) -->
+  <aside id="pilots-panel" class="hidden">
+    <h3>👥 Pilotos · <span id="panel-count">0</span></h3>
+    <ul id="panel-list"></ul>
+  </aside>
+
+  <!-- QR pequeño durante el juego -->
+  <div id="qr-mini" class="hidden">
+    <div class="qr-box">
+      <div id="qr-game"></div>
+      <div class="qr-label" id="qr-game-label"></div>
+    </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <section id="gameover" class="overlay dim hidden">
+    <h1 class="title-fail">MISIÓN FALLIDA</h1>
+    <div class="final-score">SCORE <span id="final-score">0</span></div>
+    <div class="best-sync">Mejor sincronía alcanzada: <span id="best-sync">0%</span></div>
+    <div class="pilot-counter">
+      <span class="dot"></span>
+      <span id="gameover-count">0 pilotos conectados</span>
+    </div>
+    <button id="btn-reset" class="btn-primary">🔄 NUEVA MISIÓN</button>
+  </section>
+
+  <div id="toast" class="hidden"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="/game.js"></script>
+</body>
+</html>
